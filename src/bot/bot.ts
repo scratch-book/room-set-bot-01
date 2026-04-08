@@ -4,6 +4,11 @@ import { AppConfig } from '../config/env';
 import { handleStartCtx } from './handlers/start.handler';
 import { handleFallbackCtx } from './handlers/fallback.handler';
 
+function isStartCommand(text?: string): boolean {
+  const normalized = text?.trim().toLowerCase();
+  return normalized === '/start' || normalized.startsWith('/start ') || normalized === '/старт' || normalized.startsWith('/старт ');
+}
+
 /**
  * Создаёт и настраивает экземпляр бота MAX.
  * Регистрирует обработчики событий.
@@ -39,11 +44,11 @@ export function createBot(config: AppConfig, logger: pino.Logger): Bot {
       'Получено сообщение message_created',
     );
 
-    // Проверяем, является ли сообщение командой /start
-    if (text?.trim() === '/start' || text?.trim().startsWith('/start ')) {
+    // Проверяем, является ли сообщение командой /start или /старт
+    if (isStartCommand(text)) {
       logger.info(
         { handler: 'message_start', chatId, text },
-        'Обработка команды /start через message_created',
+        'Обработка команды /start или /старт через message_created',
       );
       await handleStartCtx(ctx, config, logger);
       return;

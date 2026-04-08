@@ -71,7 +71,8 @@ describe('Bot creation', () => {
 });
 
 describe('FALLBACK_MESSAGE', () => {
-  it('содержит /start', () => {
+  it('содержит /start и /старт', () => {
     expect(FALLBACK_MESSAGE).toContain('/start');
+    expect(FALLBACK_MESSAGE).toContain('/старт');
   });
 });
