@@ -1,0 +1,13 @@
+# Docker Compose для локального запуска бота РУМСЭТ
+# Использование: docker compose up --build
+
+services:
+  bot:
+    build: .
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped

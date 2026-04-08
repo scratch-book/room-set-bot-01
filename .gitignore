@@ -1,0 +1,28 @@
+# Зависимости
+node_modules/
+
+# Сборка
+dist/
+
+# Переменные окружения (секреты)
+.env
+.env.local
+.env.*.local
+
+# Логи
+*.log
+logs/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# IDE и инструменты разработчика
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+
+# Coverage
+coverage/
