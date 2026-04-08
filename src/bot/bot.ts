@@ -44,6 +44,15 @@ export function createBot(config: AppConfig, logger: pino.Logger): Bot {
       'Получено сообщение message_created',
     );
 
+    if (text?.trim().startsWith('/')) {
+      const normalized = text.trim().toLowerCase();
+      const charCodes = Array.from(text).map((char) => char.charCodeAt(0));
+      logger.info(
+        { handler: 'slash_command_debug', chatId, text, normalized, charCodes, length: text.length },
+        'Получено сообщение, начинающееся с /',
+      );
+    }
+
     // Проверяем, является ли сообщение командой /start или /старт
     if (isStartCommand(text)) {
       logger.info(
