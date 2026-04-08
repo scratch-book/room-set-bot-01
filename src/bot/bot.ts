@@ -29,20 +29,7 @@ export function createBot(config: AppConfig, logger: pino.Logger): Bot {
     await handleStartCtx(ctx, config, logger);
   });
 
-  // Обработка команды /start
-  bot.command('start', async (ctx) => {
-    const chatId = ctx.chatId;
-    const sender = ctx.message?.sender;
-
-    logger.info(
-      { handler: 'command_start', chatId, userId: sender?.user_id },
-      'Обработка команды /start',
-    );
-
-    await handleStartCtx(ctx, config, logger);
-  });
-
-  // Обработка всех остальных сообщений (fallback)
+  // Обработка всех сообщений
   bot.on('message_created', async (ctx) => {
     const chatId = ctx.chatId;
     const text = ctx.message?.body?.text;
