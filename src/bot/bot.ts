@@ -34,6 +34,11 @@ export function createBot(config: AppConfig, logger: pino.Logger): Bot {
     const chatId = ctx.chatId;
     const text = ctx.message?.body?.text;
 
+    logger.info(
+      { handler: 'message_created', chatId, text },
+      'Получено сообщение message_created',
+    );
+
     // Проверяем, является ли сообщение командой /start
     if (text?.trim() === '/start' || text?.trim().startsWith('/start ')) {
       logger.info(
